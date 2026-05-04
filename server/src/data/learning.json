@@ -1,0 +1,26 @@
+[
+  {
+    "title": "AnyFn",
+    "explanation": "A generic function type for utilities that accept or return typed functions. Useful for memoize, debounce, throttle, and callback wrappers.",
+    "code": "export type AnyFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => TResult;",
+    "type": "node",
+    "dueDate": null,
+    "level": 0
+  },
+  {
+    "title": "VoidFn",
+    "explanation": "A callback type for functions that do not return a useful value. Useful for event handlers, subscriptions, and side-effect functions.",
+    "code": "export type VoidFn<TArgs extends unknown[] = unknown[]> = (...args: TArgs) => void;",
+    "type": "node",
+    "dueDate": null,
+    "level": 0
+  },
+  {
+    "title": "AsyncFn",
+    "explanation": "A generic promise-returning function type. Useful for retry helpers, API wrappers, async mappers, and background tasks.",
+    "code": "export type AsyncFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => Promise<TResult>;",
+    "type": "node",
+    "dueDate": null,
+    "level": 0
+  }
+]
