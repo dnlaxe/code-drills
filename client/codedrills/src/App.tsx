@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./features/home/HomePage";
 import Practice from "./features/practice/Practice";
 import NotFound from "./features/notFound/NotFound";
 import Navbar from "./components/Navbar";
+import { TasksProvider } from "./context/tasksProvider";
 
 function AppLayout() {
   return (
@@ -12,7 +12,6 @@ function AppLayout() {
 
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<HomePage />} />
             <Route path="/practice" element={<Practice />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -25,7 +24,9 @@ function AppLayout() {
 function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <TasksProvider>
+        <AppLayout />
+      </TasksProvider>
     </BrowserRouter>
   );
 }

@@ -1,26 +1,48 @@
-[
-  {
-    "title": "AnyFn",
-    "explanation": "A generic function type for utilities that accept or return typed functions. Useful for memoize, debounce, throttle, and callback wrappers.",
-    "code": "export type AnyFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => TResult;",
-    "type": "node",
-    "dueDate": null,
-    "level": 0
-  },
-  {
-    "title": "VoidFn",
-    "explanation": "A callback type for functions that do not return a useful value. Useful for event handlers, subscriptions, and side-effect functions.",
-    "code": "export type VoidFn<TArgs extends unknown[] = unknown[]> = (...args: TArgs) => void;",
-    "type": "node",
-    "dueDate": null,
-    "level": 0
-  },
-  {
-    "title": "AsyncFn",
-    "explanation": "A generic promise-returning function type. Useful for retry helpers, API wrappers, async mappers, and background tasks.",
-    "code": "export type AsyncFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => Promise<TResult>;",
-    "type": "node",
-    "dueDate": null,
-    "level": 0
-  }
-]
+{
+  "typescript": [
+    {
+      "title": "AnyFn",
+      "explanation": "A generic function type for utilities that accept or return typed functions. Useful for memoize, debounce, throttle, and callback wrappers.",
+      "code": "export type AnyFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => TResult;",
+      "dueDate": "2026-05-06T04:36:10.974Z",
+      "level": 1
+    },
+    {
+      "title": "VoidFn",
+      "explanation": "A callback type for functions that do not return a useful value. Useful for event handlers, subscriptions, and side-effect functions.",
+      "code": "export type VoidFn<TArgs extends unknown[] = unknown[]> = (...args: TArgs) => void;",
+      "dueDate": "2026-05-06T04:36:10.974Z",
+      "level": 1
+    },
+    {
+      "title": "AsyncFn",
+      "explanation": "A generic promise-returning function type. Useful for retry helpers, API wrappers, async mappers, and background tasks.",
+      "code": "export type AsyncFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => Promise<TResult>;",
+      "dueDate": "2026-05-06T04:36:11.008Z",
+      "level": 1
+    }
+  ],
+  "go": [
+    {
+      "title": "Goroutine",
+      "explanation": "A lightweight thread managed by the Go runtime. It allows functions to run concurrently with other functions.",
+      "code": "go myFunction()",
+      "dueDate": "2026-05-08T04:46:42.140Z",
+      "level": 3
+    },
+    {
+      "title": "Channel",
+      "explanation": "A typed conduit through which you can send and receive values with the channel operator, <-.",
+      "code": "ch := make(chan int)",
+      "dueDate": "2026-05-08T04:46:42.141Z",
+      "level": 3
+    },
+    {
+      "title": "Struct",
+      "explanation": "A typed collection of fields, used for grouping data together to form records.",
+      "code": "type Task struct {\n  Title string\n  Level int\n}",
+      "dueDate": "2026-05-08T04:46:42.145Z",
+      "level": 3
+    }
+  ]
+}

@@ -1,6 +1,6 @@
-const API_BASE_URL = "http://localhost:3000";
+import type { ResultPayload } from "../types/types";
 
-type Result = { title: string; done: boolean };
+const API_BASE_URL = "http://localhost:3000";
 
 async function getAllTasks() {
   const res = await fetch(`${API_BASE_URL}/api/tasks`);
@@ -16,7 +16,7 @@ async function getAllTasks() {
   return data;
 }
 
-async function sendResult(result: Result[]) {
+async function sendResult(result: ResultPayload) {
   console.log(`RESULT: ${result}`);
 
   const res = await fetch(`${API_BASE_URL}/api/tasks`, {
