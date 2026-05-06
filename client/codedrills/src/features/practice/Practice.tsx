@@ -8,12 +8,17 @@ export default function Practice() {
 
   const branchTasks = tasks[currentBranch] ?? [];
 
+  const [level, setLevel] = useState(0);
   const [current, setCurrent] = useState(0);
   const [answer, setAnswer] = useState("");
   const [done, setDone] = useState(false);
   const [result, setResult] = useState<Result[]>([]);
 
+  const currentTask = branchTasks[current];
+  const currentPrompt = currentTask?.levels[level] ?? "";
+
   useEffect(() => {
+    setLevel(0);
     setCurrent(0);
     setAnswer("");
     setDone(false);
@@ -28,31 +33,39 @@ export default function Practice() {
   function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const isCorrect = branchTasks[current].code.trim() === answer.trim();
+    const isCorrect = currentTask.code.trim() === answer.trim();
 
-    if (isCorrect) {
-      setResult((prev) => [
-        ...prev,
-        { title: branchTasks[current].title, done: true },
-      ]);
-      setCurrent(current + 1);
-      setAnswer("");
-
-      if (current >= branchTasks.length - 1) {
-        setDone(true);
-        console.log(result);
-        const finalResults = [
-          ...result,
-          { title: branchTasks[current].title, done: true },
-        ];
-        onComplete({
-          branch: currentBranch,
-          results: finalResults,
-        });
-      }
-    } else {
+    if (!isCorrect) {
       setError("Try again!");
+      return;
     }
+
+    setAnswer("");
+    setError(null);
+
+    const isLastLevel = level === 2;
+    if (!isLastLevel) {
+      setLevel((prev) => prev + 1);
+      return;
+    }
+
+    const completedResult = { title: currentTask.title, done: true };
+    const finalResults = [...result, completedResult];
+    const isLastTask = current === branchTasks.length - 1;
+
+    setResult(finalResults);
+
+    if (isLastTask) {
+      setDone(true);
+      onComplete({
+        branch: currentBranch,
+        results: finalResults,
+      });
+      return;
+    }
+
+    setLevel(0);
+    setCurrent((prev) => prev + 1);
   }
 
   if (loading) {
@@ -81,16 +94,20 @@ export default function Practice() {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto mt-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            <h1 className="text-xl">{branchTasks[current].title}</h1>
-            <p className="text-xl">{branchTasks[current].explanation}</p>
+            <h1 className="text-xl border border-slate-200 self-start px-3 py-2 bg-slate-50">
+              {currentTask.title}
+            </h1>
+            <p className="text-xl px-2 font-[400] tracking-[0.25px]">
+              {currentTask.explanation}
+            </p>
           </div>
 
           <div className="flex flex-col">
-            <pre className="border p-4 text-lg border-b-0 overflow-x-auto">
-              <code>{branchTasks[current].code}</code>
+            <pre className="border border-slate-200 bg-slate-50 p-4 text-lg border-b-0 overflow-x-auto">
+              <code>{currentPrompt}</code>
             </pre>
             <textarea
               className={`h-100 w-full border ${error ? "border-2 border-red-500" : ""} p-4 text-lg font-[monospace]`}
@@ -111,7 +128,7 @@ export default function Practice() {
           <div className="flex flex-row justify-end">
             <button
               type="submit"
-              className={`text-xl border px-5 py-2 ${error ? "opacity-50" : ""}`}
+              className={`text-xl border border-slate-200 px-5 py-2 ${error ? "opacity-50" : ""}`}
               disabled={error !== "" || loading}
             >
               Submit

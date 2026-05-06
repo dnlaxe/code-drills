@@ -5,7 +5,7 @@ interface Task {
   title: string;
   explanation: string;
   code: string;
-  dueDate: string | null;
+  dueDate: number;
   level: number;
 }
 

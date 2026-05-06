@@ -1,12 +1,21 @@
 import { readJson, writeJson } from "../../data/readWriteJson";
 
-function calculateDueDate(level: number): string {
-  const now = new Date();
-  now.setDate(now.getDate() + level);
-  return now.toISOString();
+interface StoredTask {
+  title: string;
+  explanation: string;
+  code: string;
+  dueDate: number;
+  level: number;
 }
 
-export default async function updateJsonData(
+type TasksByBranch = Record<string, StoredTask[]>;
+
+function calculateDueDate(level: number): number {
+  const millisecondsPerHour = 60 * 60 * 1000;
+  return Date.now() + level * millisecondsPerHour;
+}
+
+export async function updateJsonData(
   branch: string,
   results: { title: string; done: boolean }[],
 ) {
@@ -34,4 +43,33 @@ export default async function updateJsonData(
   }
 
   return { ok: true };
+}
+
+export async function prepareDueTasks() {
+  const allTasks = await readJson();
+
+  const now = Date.now();
+
+  const dueTasks = Object.fromEntries(
+    Object.entries(allTasks).map(([branch, cards]) => [
+      branch,
+      cards.filter((card) => card.dueDate <= now),
+    ]),
+  );
+
+  const dueTasksWithLevels = await createLevels(dueTasks);
+
+  return dueTasksWithLevels;
+}
+
+function createLevels(tasks: TasksByBranch) {
+  return Object.fromEntries(
+    Object.entries(tasks).map(([branch, cards]) => [
+      branch,
+      cards.map((card) => ({
+        ...card,
+        levels: [card.code, card.code, card.code],
+      })),
+    ]),
+  );
 }

@@ -1,48 +1,134 @@
 {
   "typescript": [
     {
-      "title": "AnyFn",
-      "explanation": "A generic function type for utilities that accept or return typed functions. Useful for memoize, debounce, throttle, and callback wrappers.",
-      "code": "export type AnyFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => TResult;",
-      "dueDate": "2026-05-06T04:36:10.974Z",
-      "level": 1
+      "title": "Array Splice",
+      "explanation": "How do you remove one element and add 'drill' at index 1 in const tools: string[] = ['hammer', 'screwdriver', 'wrench']?",
+      "code": "const removed = tools.splice(1, 1, 'drill');",
+      "dueDate": 1777974119000,
+      "level": 0
     },
     {
-      "title": "VoidFn",
-      "explanation": "A callback type for functions that do not return a useful value. Useful for event handlers, subscriptions, and side-effect functions.",
-      "code": "export type VoidFn<TArgs extends unknown[] = unknown[]> = (...args: TArgs) => void;",
-      "dueDate": "2026-05-06T04:36:10.974Z",
-      "level": 1
+      "title": "Array Slice",
+      "explanation": "How do you extract the first two elements without mutating const items: string[] = ['a', 'b', 'c']?",
+      "code": "const subset = items.slice(0, 2);",
+      "dueDate": 1777974119000,
+      "level": 0
     },
     {
-      "title": "AsyncFn",
-      "explanation": "A generic promise-returning function type. Useful for retry helpers, API wrappers, async mappers, and background tasks.",
-      "code": "export type AsyncFn<TArgs extends unknown[] = unknown[], TResult = unknown> = (...args: TArgs) => Promise<TResult>;",
-      "dueDate": "2026-05-06T04:36:11.008Z",
-      "level": 1
+      "title": "Typed Regex",
+      "explanation": "How do you extract 'user' and 'host' from const email = 'hello@example.com' using named groups?",
+      "code": "const pattern: RegExp = /(?<user>.*)@(?<host>.*)/;\nconst match = email.match(pattern);",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Object Iteration",
+      "explanation": "How do you log every key and value in const data: Record<string, number> = { a: 1, b: 2 } using entries?",
+      "code": "for (const [key, value] of Object.entries(data)) {\n  console.log(key, value);\n}",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "For Of Loop",
+      "explanation": "How do you iterate through the values of const list: string[] = ['x', 'y', 'z'] directly?",
+      "code": "for (const item of list) {\n  console.log(item);\n}",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "For In Loop",
+      "explanation": "How do you access values by key in const obj = { a: 1 } using a property loop and type assertion?",
+      "code": "for (const key in obj) {\n  const val = obj[key as keyof typeof obj];\n}",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Optional Chaining",
+      "explanation": "How do you safely access a nested property like 'zip' from an object that might be null or undefined without throwing an error?",
+      "code": "const zipCode = user?.address?.zip;",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Nullish Coalescing",
+      "explanation": "How do you provide a default value of 0 to a variable only when the input is null or undefined (but not 0 or false)?",
+      "code": "const count = input ?? 0;",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Type Narrowing (typeof)",
+      "explanation": "How do you ensure a variable of type 'string | number' is treated as a string so you can safely call .toLowerCase()?",
+      "code": "if (typeof val === 'string') {\n  console.log(val.toLowerCase());\n}",
+      "dueDate": 1777974119000,
+      "level": 0
     }
   ],
   "go": [
     {
-      "title": "Goroutine",
-      "explanation": "A lightweight thread managed by the Go runtime. It allows functions to run concurrently with other functions.",
-      "code": "go myFunction()",
-      "dueDate": "2026-05-08T04:46:42.140Z",
-      "level": 3
+      "title": "Executable Structure",
+      "explanation": "How do you define a minimal, executable Go program that prints a message to standard output?",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfmt.Println(\"Starting system...\")\n}",
+      "dueDate": 1777974119000,
+      "level": 0
     },
     {
-      "title": "Channel",
-      "explanation": "A typed conduit through which you can send and receive values with the channel operator, <-.",
-      "code": "ch := make(chan int)",
-      "dueDate": "2026-05-08T04:46:42.141Z",
-      "level": 3
+      "title": "Variable Initialization",
+      "explanation": "How do you declare a strongly-typed integer and an implicitly-typed string?",
+      "code": "var maxRetries int = 3\nuserStatus := \"active\"",
+      "dueDate": 1777974119000,
+      "level": 0
     },
     {
-      "title": "Struct",
-      "explanation": "A typed collection of fields, used for grouping data together to form records.",
-      "code": "type Task struct {\n  Title string\n  Level int\n}",
-      "dueDate": "2026-05-08T04:46:42.145Z",
-      "level": 3
+      "title": "Multiple Returns And Errors",
+      "explanation": "How do you define a function that handles an edge case by returning a result alongside an explicit error?",
+      "code": "func calculateRatio(a, b float64) (float64, error) {\n\tif b == 0 {\n\t\treturn 0, fmt.Errorf(\"denominator cannot be zero\")\n\t}\n\treturn a / b, nil\n}",
+      "dueDate": 1777974119000,
+      "level": 0
+    }
+  ],
+  "node": [
+    {
+      "title": "Basic HTTP Server",
+      "explanation": "How do you create a simple HTTP server in Node.js that listens on a specific port and responds with a message?",
+      "code": "const http = require('node:http');\n\nconst server = http.createServer((req, res) => {\n\tres.writeHead(200, { 'Content-Type': 'text/plain' });\n\tres.end('Hello, Node.js!');\n});\n\nserver.listen(3000, () => {\n\tconsole.log('Server listening on port 3000');\n});",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Read File Asynchronously",
+      "explanation": "How do you read the contents of a file asynchronously using the built-in fs module without blocking the event loop?",
+      "code": "const fs = require('node:fs');\n\nfs.readFile('example.txt', 'utf8', (err, data) => {\n\tif (err) {\n\t\tconsole.error('Error reading file:', err);\n\t\treturn;\n\t}\n\tconsole.log('File content:', data);\n});",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Exporting and Importing Modules",
+      "explanation": "How do you define a function in one file and export it using CommonJS so it can be required and used in another file?",
+      "code": "// math.js\nfunction add(a, b) {\n\treturn a + b;\n}\nmodule.exports = { add };\n\n// app.js\nconst math = require('./math.js');\nconsole.log('Result:', math.add(2, 3));",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Write File Asynchronously",
+      "explanation": "How do you write data to a file asynchronously using the built-in fs module, creating or overwriting the file without blocking the event loop?",
+      "code": "const fs = require('node:fs');\n\nconst content = 'Some content to write to the file!';\n\nfs.writeFile('output.txt', content, (err) => {\n\tif (err) {\n\t\tconsole.error('Error writing to file:', err);\n\t\treturn;\n\t}\n\tconsole.log('Successfully wrote to file!');\n});",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Working with File Paths",
+      "explanation": "How do you safely join and manipulate directory paths in a cross-platform way (Windows vs macOS/Linux) using the built-in path module?",
+      "code": "const path = require('node:path');\n\n// Safely joins paths using the correct separator for the OS\nconst fullPath = path.join(__dirname, 'data', 'config.json');\n\nconsole.log('Constructed Path:', fullPath);\nconsole.log('File Extension:', path.extname(fullPath));\nconsole.log('Base Name:', path.basename(fullPath));",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Custom Event Emitters",
+      "explanation": "How do you create, emit, and listen to your own custom events using Node's core event-driven architecture?",
+      "code": "const EventEmitter = require('node:events');\n\nclass MyEmitter extends EventEmitter {}\nconst myEmitter = new MyEmitter();\n\n// Register a listener for the 'userJoined' event\nmyEmitter.on('userJoined', (username) => {\n\tconsole.log(`Welcome to the server, ${username}!`);\n});\n\n// Emit the event with data\nmyEmitter.emit('userJoined', 'NodeNinja');",
+      "dueDate": 1777974119000,
+      "level": 0
     }
   ]
 }

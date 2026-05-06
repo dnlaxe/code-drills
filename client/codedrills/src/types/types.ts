@@ -9,7 +9,8 @@ type Task = {
   title: string;
   explanation: string;
   code: string;
-  dueDate: string | null;
+  levels: string[];
+  dueDate: number;
   level: number;
 };
 
@@ -24,8 +25,6 @@ type TasksContextValue = {
   getTasks: () => Promise<void>;
   currentBranch: string;
   setCurrentBranch: (branch: string) => void;
-  current: number;
-  setCurrent: (value: number) => void;
 };
 
 export type { Result, Task, TasksContextValue, ResultPayload };

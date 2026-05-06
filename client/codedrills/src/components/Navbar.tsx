@@ -4,7 +4,7 @@ export default function Navbar() {
   const { currentBranch, setCurrentBranch, tasks } = useTasks();
 
   return (
-    <nav className="flex flex-col border-r w-40">
+    <nav className="flex flex-col border-r border-slate-200 bg-slate-50 pt-8">
       {Object.entries(tasks).map(([branch, tasks]) => {
         return (
           <button
@@ -13,7 +13,7 @@ export default function Navbar() {
               console.log(`${branch} selected`);
               setCurrentBranch(branch);
             }}
-            className={`${currentBranch === branch ? "bg-blue-200" : ""}`}
+            className={`border-y border-slate-50 ${currentBranch === branch ? "bg-slate-100 border-y border-slate-200" : ""} px-8 py-1`}
           >
             {branch}- {tasks.length}
           </button>

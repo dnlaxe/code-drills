@@ -1,12 +1,9 @@
-import { Request, Response, Router } from "express";
-import learningData from "../../data/learning.json";
-import updateData from "./tasks.controller";
+import { Router } from "express";
+import { updateData, getDueTasks } from "./tasks.controller";
 
 const router = Router();
 
-router.get("/", (_req: Request, res: Response) => {
-  res.json(learningData);
-});
+router.get("/", getDueTasks);
 
 router.post("/", updateData);
 

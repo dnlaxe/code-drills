@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import updateJsonData from "./tasks.service";
+import { updateJsonData, prepareDueTasks } from "./tasks.service";
 
-export default async function updateData(req: Request, res: Response) {
+export async function updateData(req: Request, res: Response) {
   const data = req.body;
   const branch = data.branch;
   const results = data.results;
@@ -14,4 +14,14 @@ export default async function updateData(req: Request, res: Response) {
   }
 
   res.status(200).json({ message: "Result received" });
+}
+
+export async function getDueTasks(req: Request, res: Response) {
+  const dueTasks = await prepareDueTasks();
+
+  if (Object.keys(dueTasks).length === 0) {
+    return res.json({});
+  }
+
+  return res.json(dueTasks);
 }
