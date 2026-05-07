@@ -12,7 +12,7 @@ type TasksByBranch = Record<string, StoredTask[]>;
 
 function calculateDueDate(level: number): number {
   const millisecondsPerHour = 60 * 60 * 1000;
-  return Date.now() + level * millisecondsPerHour;
+  return Date.now() + 2 * level * millisecondsPerHour;
 }
 
 export async function updateJsonData(
@@ -53,7 +53,9 @@ export async function prepareDueTasks() {
   const dueTasks = Object.fromEntries(
     Object.entries(allTasks).map(([branch, cards]) => [
       branch,
-      cards.filter((card) => card.dueDate <= now),
+      cards
+        .filter((card) => card.dueDate <= now)
+        .sort((a, b) => b.level - a.level),
     ]),
   );
 

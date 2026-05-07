@@ -2,132 +2,223 @@
   "typescript": [
     {
       "title": "Array Splice",
-      "explanation": "How do you remove one element and add 'drill' at index 1 in const tools: string[] = ['hammer', 'screwdriver', 'wrench']?",
+      "explanation": "How do you remove one element and add 'drill' at index 1 in \nconst tools: string[] = ['hammer', 'screwdriver', 'wrench']?",
       "code": "const removed = tools.splice(1, 1, 'drill');",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397451,
+      "level": 1
     },
     {
       "title": "Array Slice",
       "explanation": "How do you extract the first two elements without mutating const items: string[] = ['a', 'b', 'c']?",
       "code": "const subset = items.slice(0, 2);",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397453,
+      "level": 1
     },
     {
       "title": "Typed Regex",
       "explanation": "How do you extract 'user' and 'host' from const email = 'hello@example.com' using named groups?",
       "code": "const pattern: RegExp = /(?<user>.*)@(?<host>.*)/;\nconst match = email.match(pattern);",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397455,
+      "level": 1
     },
     {
       "title": "Object Iteration",
       "explanation": "How do you log every key and value in const data: Record<string, number> = { a: 1, b: 2 } using entries?",
       "code": "for (const [key, value] of Object.entries(data)) {\n  console.log(key, value);\n}",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397456,
+      "level": 1
     },
     {
       "title": "For Of Loop",
       "explanation": "How do you iterate through the values of const list: string[] = ['x', 'y', 'z'] directly?",
       "code": "for (const item of list) {\n  console.log(item);\n}",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397457,
+      "level": 1
     },
     {
       "title": "For In Loop",
       "explanation": "How do you access values by key in const obj = { a: 1 } using a property loop and type assertion?",
       "code": "for (const key in obj) {\n  const val = obj[key as keyof typeof obj];\n}",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397460,
+      "level": 1
     },
     {
       "title": "Optional Chaining",
       "explanation": "How do you safely access a nested property like 'zip' from an object that might be null or undefined without throwing an error?",
       "code": "const zipCode = user?.address?.zip;",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397461,
+      "level": 1
     },
     {
       "title": "Nullish Coalescing",
       "explanation": "How do you provide a default value of 0 to a variable only when the input is null or undefined (but not 0 or false)?",
       "code": "const count = input ?? 0;",
-      "dueDate": 1777974119000,
-      "level": 0
+      "dueDate": 1778060397462,
+      "level": 1
     },
     {
       "title": "Type Narrowing (typeof)",
       "explanation": "How do you ensure a variable of type 'string | number' is treated as a string so you can safely call .toLowerCase()?",
       "code": "if (typeof val === 'string') {\n  console.log(val.toLowerCase());\n}",
+      "dueDate": 1778060397463,
+      "level": 1
+    },
+    {
+      "title": "Boolean Cast (Double Bang)",
+      "explanation": "How do you convert the result of a regex match (which returns a truthy array or a falsy null) into a strict boolean? The result is true if matched, false if null.",
+      "code": "const isEmail = !!email.match(pattern);",
+      "dueDate": 1777974119000,
+      "level": 0
+    },
+    {
+      "title": "Boolean Constructor",
+      "explanation": "How do you use the built-in Boolean constructor to explicitly cast a value like a regex match result to a boolean for better readability? The result is true if matched, false if null.",
+      "code": "const isEmail = Boolean(email.match(pattern));",
       "dueDate": 1777974119000,
       "level": 0
     }
   ],
-  "go": [
+  "node modules": [
     {
-      "title": "Executable Structure",
-      "explanation": "How do you define a minimal, executable Go program that prints a message to standard output?",
-      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfmt.Println(\"Starting system...\")\n}",
-      "dueDate": 1777974119000,
+      "title": "node:http Server",
+      "explanation": "Create a basic web server that responds with a 200 status and a plain text message.",
+      "code": "import http from 'node:http';\n\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { 'Content-Type': 'text/plain' });\n  res.end('Hello, Node.js 2026!');\n});\n\nserver.listen(3000);",
+      "dueDate": 1746460800000,
       "level": 0
     },
     {
-      "title": "Variable Initialization",
-      "explanation": "How do you declare a strongly-typed integer and an implicitly-typed string?",
-      "code": "var maxRetries int = 3\nuserStatus := \"active\"",
-      "dueDate": 1777974119000,
+      "title": "node:fs/promises File Ops",
+      "explanation": "Read and write files asynchronously using the modern Promise-based API with top-level await.",
+      "code": "import { readFile, writeFile } from 'node:fs/promises';\n\nconst data = await readFile('example.txt', 'utf8');\nawait writeFile('new.txt', 'Hello World');",
+      "dueDate": 1746460800000,
       "level": 0
     },
     {
-      "title": "Multiple Returns And Errors",
-      "explanation": "How do you define a function that handles an edge case by returning a result alongside an explicit error?",
-      "code": "func calculateRatio(a, b float64) (float64, error) {\n\tif b == 0 {\n\t\treturn 0, fmt.Errorf(\"denominator cannot be zero\")\n\t}\n\treturn a / b, nil\n}",
-      "dueDate": 1777974119000,
+      "title": "node:fs/promises Directory & Delete",
+      "explanation": "Recursively create directories and delete files using non-blocking Promise methods.",
+      "code": "import { mkdir, unlink } from 'node:fs/promises';\n\nawait mkdir('a/b/c', { recursive: true });\nawait unlink('temp.txt');",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:timers/promises",
+      "explanation": "Use the awaitable version of setTimeout for cleaner asynchronous delays.",
+      "code": "import { setTimeout } from 'node:timers/promises';\n\nawait setTimeout(1000);\nconsole.log('1 second passed');",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:path Joins",
+      "explanation": "Construct absolute file paths using OS-correct separators and the ESM directory metadata.",
+      "code": "import path from 'node:path';\n\nconst logPath = path.join(import.meta.dirname, 'logs', 'app.log');\nconst absolutePath = path.resolve('data', 'settings.json');",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:events Emitter",
+      "explanation": "Decouple system logic by creating and triggering custom events with the EventEmitter.",
+      "code": "import { EventEmitter } from 'node:events';\n\nconst emitter = new EventEmitter();\n\nemitter.on('data', (data) => {\n  console.log('Received:', data);\n});\n\nemitter.emit('data', { id: 1 });",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:stream Pipeline",
+      "explanation": "Safely manage data flow between readable and writable streams with automatic error handling.",
+      "code": "import { pipeline } from 'node:stream/promises';\nimport { createReadStream, createWriteStream } from 'node:fs';\n\nawait pipeline(\n  createReadStream('input.txt'),\n  createWriteStream('output.txt')\n);",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:crypto Hashing",
+      "explanation": "Generate secure random identifiers and create data fingerprints using SHA-256.",
+      "code": "import { randomBytes, createHash } from 'node:crypto';\n\nconst id = randomBytes(16).toString('hex');\nconst hash = createHash('sha256').update('data').digest('hex');",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:process Env & Exit",
+      "explanation": "Load environment variables natively and handle process termination status codes.",
+      "code": "import { env, exit, loadEnvFile } from 'node:process';\n\nloadEnvFile();\nconst port = env.PORT || 3000;\n\nif (!port) {\n  exit(1);\n}",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:util Inspect",
+      "explanation": "Use util.inspect to visualize deep, nested object structures and hidden properties in the terminal with ANSI colors.",
+      "code": "import { inspect } from 'node:util';\n\nconst config = {\n  db: { host: 'localhost', credentials: { user: 'admin', pass: 'secret' } },\n  layers: [ { id: 1, metadata: { active: true } } ]\n};\n\nconsole.log(inspect(config, { depth: null, colors: true }));\nconsole.log(inspect(process, { showHidden: true, depth: 1 }));",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:url Parsing",
+      "explanation": "Safely parse strings into WHATWG URL objects to extract hostnames, search parameters, and protocols without manual regex.",
+      "code": "const input = '/api/data?id=123';\nconst base = 'https://example.com';\nconst myURL = new URL(input, base);\n\nconsole.log(myURL.hostname);\nconsole.log(myURL.searchParams.get('id'));",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:url Path Conversion",
+      "explanation": "Convert ESM file URLs into platform-specific system paths safely using the fileURLToPath utility.",
+      "code": "import { fileURLToPath } from 'node:url';\n\nconst filePath = fileURLToPath(import.meta.url);\nconsole.log(filePath);",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "node:assert Invariants",
+      "explanation": "Apply strict assertion mode to enforce code invariants and catch logic errors early with precise error messages.",
+      "code": "import assert from 'node:assert/strict';\n\nfunction processUser(user) {\n  assert.ok(user.id, 'User must have a valid ID');\n  \n  const role = 'guest';\n  assert.strictEqual(user.role, role, `User must be a ${role}`);\n}\n\ntry {\n  processUser({ id: 0, role: 'admin' });\n} catch (err) {\n  console.error(err.message);\n}",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "Graceful Shutdown",
+      "explanation": "Implement a shutdown pattern that stops accepting new connections while allowing existing requests to finish processing before exiting.",
+      "code": "import { createServer } from 'node:http';\nimport { process } from 'node:process';\n\nconst server = createServer((req, res) => {\n  res.writeHead(200, { 'Content-Type': 'text/plain' });\n  res.end('Request processed safely.');\n});\n\nserver.listen(3000);\n\nconst shutdown = () => {\n  server.close((err) => {\n    if (err) {\n      process.exit(1);\n    }\n    process.exit(0);\n  });\n};\n\nprocess.on('SIGTERM', shutdown);\nprocess.on('SIGINT', shutdown);",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "Stream Pipeline",
+      "explanation": "Use the promise-based pipeline to stream data with automatic cleanup and compression, ensuring all streams are destroyed on failure.",
+      "code": "import { pipeline } from 'node:stream/promises';\nimport { createReadStream, createWriteStream } from 'node:fs';\n\nimport { createGzip } from 'node:zlib';\n\ntry {\n  await pipeline(\n    createReadStream('large-input.txt'),\n    createGzip(),\n    createWriteStream('output.txt.gz')\n  );\n} catch (err) {\n  console.error('Pipeline failed:', err.message);\n}",
+      "dueDate": 1746460800000,
+      "level": 0
+    },
+    {
+      "title": "Native Test Runner",
+      "explanation": "Write performance-oriented tests using the built-in node:test runner with support for suites, individual specs, and subtests.",
+      "code": "import test, { describe, it } from 'node:test';\nimport assert from 'node:assert/strict';\n\ndescribe('Application Logic', () => {\n  it('should calculate sums correctly', () => {\n    assert.strictEqual(2 + 2, 4);\n  });\n\n  test('async data fetch', async (t) => {\n    const data = await Promise.resolve({ status: 'ok' });\n    assert.deepStrictEqual(data, { status: 'ok' });\n\n    await t.test('sub-validation of status', () => {\n      assert.ok(data.status);\n    });\n  });\n});",
+      "dueDate": 1746460800000,
       "level": 0
     }
   ],
   "node": [
     {
-      "title": "Basic HTTP Server",
-      "explanation": "How do you create a simple HTTP server in Node.js that listens on a specific port and responds with a message?",
-      "code": "const http = require('node:http');\n\nconst server = http.createServer((req, res) => {\n\tres.writeHead(200, { 'Content-Type': 'text/plain' });\n\tres.end('Hello, Node.js!');\n});\n\nserver.listen(3000, () => {\n\tconsole.log('Server listening on port 3000');\n});",
-      "dueDate": 1777974119000,
+      "title": "Asynchronous Pattern with Top-Level Await",
+      "explanation": "In modern Node.js (ESM), top-level await allows you to perform asynchronous operations like reading a file without wrapping the logic in a function. Using process.exitCode = 1 instead of process.exit(1) ensures the process exits with an error status while allowing the event loop to finish pending tasks gracefully.\nThis example reads a JSON configuration file, parses it into a typed interface, and handles potential errors using type narrowing.",
+      "code": "import { readFile } from 'node:fs/promises';\n\ninterface AppConfig {\n  repo: string;\n  dry: boolean;\n  debug: boolean;\n}\n\ntry {\n  const data: string = await readFile('./config.json', 'utf-8');\n  const config = JSON.parse(data) as AppConfig;\n\n  console.log('App Config Loaded:', config);\n} catch (err: unknown) {\n  if (err instanceof Error) {\n    console.error('Failed to load config:', err.message);\n  } else {\n    console.error('An unexpected error occurred:', err);\n  }\n\n  process.exitCode = 1;\n}",
+      "dueDate": 1778112000000,
       "level": 0
     },
     {
-      "title": "Read File Asynchronously",
-      "explanation": "How do you read the contents of a file asynchronously using the built-in fs module without blocking the event loop?",
-      "code": "const fs = require('node:fs');\n\nfs.readFile('example.txt', 'utf8', (err, data) => {\n\tif (err) {\n\t\tconsole.error('Error reading file:', err);\n\t\treturn;\n\t}\n\tconsole.log('File content:', data);\n});",
-      "dueDate": 1777974119000,
+      "title": "Robust Path Handling in ESM",
+      "explanation": "In ES modules, the global __dirname variable is absent. It is replaced by import.meta.dirname, which provides the absolute path to the directory containing the current module. Using the node:path module ensures that file paths are joined correctly across different operating systems, preventing issues with forward or backward slashes.\nThis approach allows for reliable referencing of local assets like databases or configuration files relative to the source code.",
+      "code": "import path from 'node:path';\n\nconst dbPath: string = path.join(import.meta.dirname, 'data', 'users.db');\n\nconsole.log(`Database is located at: ${dbPath}`);\nconsole.log(`File extension: ${path.extname(dbPath)}`);",
+      "dueDate": 1778112000000,
       "level": 0
     },
     {
-      "title": "Exporting and Importing Modules",
-      "explanation": "How do you define a function in one file and export it using CommonJS so it can be required and used in another file?",
-      "code": "// math.js\nfunction add(a, b) {\n\treturn a + b;\n}\nmodule.exports = { add };\n\n// app.js\nconst math = require('./math.js');\nconsole.log('Result:', math.add(2, 3));",
-      "dueDate": 1777974119000,
+      "title": "The Event Emitter Pattern",
+      "explanation": "Node.js uses the EventEmitter class to implement the Observer pattern, allowing objects to emit named events that cause Function objects (listeners) to be called. By using the node: prefix, you ensure you are loading the built-in module. \nIn TypeScript, you can define interfaces for your events to ensure that data passed through emit and on methods is type-safe. This example demonstrates creating a custom class that extends EventEmitter to handle door sensor signals.",
+      "code": "import { EventEmitter } from 'node:events';\n\ninterface DoorEvents {\n  open: [time: number];\n  close: [time: number];\n}\n\nclass DoorSensor extends EventEmitter {}\n\nconst kitchenSensor = new DoorSensor();\n\nkitchenSensor.on('open', (time: number) => {\n  console.log(`Alert: Kitchen door opened at ${time}`);\n});\n\nkitchenSensor.emit('open', Date.now());",
+      "dueDate": 1778112000000,
       "level": 0
     },
     {
-      "title": "Write File Asynchronously",
-      "explanation": "How do you write data to a file asynchronously using the built-in fs module, creating or overwriting the file without blocking the event loop?",
-      "code": "const fs = require('node:fs');\n\nconst content = 'Some content to write to the file!';\n\nfs.writeFile('output.txt', content, (err) => {\n\tif (err) {\n\t\tconsole.error('Error writing to file:', err);\n\t\treturn;\n\t}\n\tconsole.log('Successfully wrote to file!');\n});",
-      "dueDate": 1777974119000,
-      "level": 0
-    },
-    {
-      "title": "Working with File Paths",
-      "explanation": "How do you safely join and manipulate directory paths in a cross-platform way (Windows vs macOS/Linux) using the built-in path module?",
-      "code": "const path = require('node:path');\n\n// Safely joins paths using the correct separator for the OS\nconst fullPath = path.join(__dirname, 'data', 'config.json');\n\nconsole.log('Constructed Path:', fullPath);\nconsole.log('File Extension:', path.extname(fullPath));\nconsole.log('Base Name:', path.basename(fullPath));",
-      "dueDate": 1777974119000,
-      "level": 0
-    },
-    {
-      "title": "Custom Event Emitters",
-      "explanation": "How do you create, emit, and listen to your own custom events using Node's core event-driven architecture?",
-      "code": "const EventEmitter = require('node:events');\n\nclass MyEmitter extends EventEmitter {}\nconst myEmitter = new MyEmitter();\n\n// Register a listener for the 'userJoined' event\nmyEmitter.on('userJoined', (username) => {\n\tconsole.log(`Welcome to the server, ${username}!`);\n});\n\n// Emit the event with data\nmyEmitter.emit('userJoined', 'NodeNinja');",
-      "dueDate": 1777974119000,
+      "title": "Basic HTTP Server (No Frameworks)",
+      "explanation": "The node:http module provides the foundation for web servers in Node.js. In this ESM implementation, we use IncomingMessage and ServerResponse types to handle the request/response stream. Using TypeScript interfaces for API responses ensures consistency, while literal types like 'OK' | 'Error' provide strict narrowing.\nThe server checks the request URL and method, returning a JSON payload for valid routes and a 404 status for others. This low-level approach is essential for understanding how data flows through a server before moving to high-level frameworks like Express.",
+      "code": "import http, { IncomingMessage, ServerResponse } from 'node:http';\n\ninterface StatusResponse {\n  status: 'OK' | 'Error';\n  uptime: number;\n}\n\nconst server = http.createServer((req: IncomingMessage, res: ServerResponse) => {\n  const { url, method } = req;\n\n  if (url === '/api/status' && method === 'GET') {\n    const payload: StatusResponse = {\n      status: 'OK',\n      uptime: process.uptime()\n    };\n\n    res.writeHead(200, { 'Content-Type': 'application/json' });\n    res.end(JSON.stringify(payload));\n  } else {\n    res.writeHead(404);\n    res.end('Not Found');\n  }\n});\n\nserver.listen(3000, () => {\n  console.log('Server running at http://localhost:3000');\n});",
+      "dueDate": 1778112000000,
       "level": 0
     }
   ]

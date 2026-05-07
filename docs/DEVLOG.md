@@ -18,7 +18,12 @@
 - basic styling
 - updated json
 
+## 2026-05-07
+
+- saves after every level 3
+- updated learning data
+- a little styling
+- taks are sorted by level. highest level gets priority. review is always priority in learning.
+
   NEXT:
-  [ ] update db after every third level
-  [ ] change home path
   [ ] list management, add lists, delete lists, add cards, delete cards, edit cards

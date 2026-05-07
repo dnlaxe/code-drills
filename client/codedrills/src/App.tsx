@@ -10,9 +10,9 @@ function AppLayout() {
       <div className="flex min-h-screen">
         <Navbar />
 
-        <main className="flex-1">
+        <main className="flex-1 pb-8">
           <Routes>
-            <Route path="/practice" element={<Practice />} />
+            <Route path="/" element={<Practice />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
