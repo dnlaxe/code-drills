@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { Task } from "../types/types";
-import { getAllTasks } from "../api/data";
+import type { ResultPayload, Task } from "../types/types";
+import { getAllTasks, sendResult } from "../api/data";
 import { TasksContext } from "./tasksContext";
 
 type TaskProviderProps = { children: React.ReactNode };
@@ -12,11 +12,9 @@ export function TasksProvider({ children }: TaskProviderProps) {
   const [error, setError] = useState<string | null>(null);
   const [currentBranch, setCurrentBranch] = useState("typescript");
 
-  const getTasks = async () => {
+  async function refreshTasks() {
     try {
-      setLoading(true);
       setError(null);
-
       const data = await getAllTasks();
       setTasks(data);
     } catch (err) {
@@ -25,13 +23,61 @@ export function TasksProvider({ children }: TaskProviderProps) {
       } else {
         setError("Fetching data error");
       }
-    } finally {
-      setLoading(false);
     }
-  };
+  }
+
+  function selectBranch(branch: string) {
+    setCurrentBranch(branch);
+  }
+
+  async function submitPracticeResult(payload: ResultPayload) {
+    try {
+      setUpdating(true);
+      setError(null);
+      await sendResult(payload);
+      await refreshTasks();
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Submitting result failed");
+      }
+    } finally {
+      setUpdating(false);
+    }
+  }
 
   useEffect(() => {
-    getTasks();
+    let cancelled = false;
+
+    async function loadInitialTasks() {
+      try {
+        setError(null);
+        const data = await getAllTasks();
+
+        if (cancelled) return;
+
+        setTasks(data);
+      } catch (err) {
+        if (cancelled) return;
+
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Fetching data error");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadInitialTasks();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const value = {
@@ -39,12 +85,10 @@ export function TasksProvider({ children }: TaskProviderProps) {
     loading,
     updating,
     error,
-    getTasks,
     currentBranch,
-    setCurrentBranch,
-    setLoading,
-    setError,
-    setUpdating,
+    refreshTasks,
+    selectBranch,
+    submitPracticeResult,
   };
 
   return (

@@ -1,23 +1,22 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Practice from "./features/practice/Practice";
-import NotFound from "./features/notFound/NotFound";
 import Navbar from "./components/Navbar";
 import { TasksProvider } from "./context/tasksProvider";
+import { useTasks } from "./context/tasksContext";
 
 function AppLayout() {
-  return (
-    <>
-      <div className="flex min-h-screen">
-        <Navbar />
+  const { currentBranch } = useTasks();
 
-        <main className="flex-1 pb-8">
-          <Routes>
-            <Route path="/" element={<Practice />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-      </div>
-    </>
+  return (
+    <div className="flex min-h-screen">
+      <Navbar />
+
+      <main className="flex-1 bg-[#EEEEEE]">
+        <Routes>
+          <Route path="*" element={<Practice key={currentBranch} />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 

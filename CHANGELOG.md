@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-05-11
+
+### Added
+
+- Configurable blanked-code practice levels for review
+
 ## 2026-05-07
 
 ### Changed

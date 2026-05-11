@@ -1,31 +1,21 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-interface Task {
-  title: string;
-  explanation: string;
-  code: string;
-  dueDate: number;
-  level: number;
-}
-
-type TasksByBranch = Record<string, Task[]>;
-
 const dbPath = join(import.meta.dirname, "..", "data", "learning.json");
 
-export async function readJson(): Promise<TasksByBranch> {
+export async function loadJsonFile<T>(fallback: T): Promise<T> {
   try {
     const raw = await readFile(dbPath, "utf-8");
-    return JSON.parse(raw);
+    return JSON.parse(raw) as T;
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") {
-      return {};
+      return fallback;
     }
     throw error;
   }
 }
 
-export async function writeJson(payload: TasksByBranch): Promise<void> {
+export async function saveJsonFile(payload: unknown): Promise<void> {
   const data = JSON.stringify(payload, null, 2);
   await writeFile(dbPath, data);
 }

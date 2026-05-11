@@ -1,26 +1,28 @@
-import { Request, Response } from "express";
-import { updateJsonData, prepareDueTasks } from "./tasks.service";
+import type { Request, Response } from "express";
+import { prepareDueTasks, updateJsonData } from "./tasks.service.js";
+import type { UpdateTasksPayload } from "./tasks.types.js";
+import { attempt } from "../../utils/attempt.js";
 
 export async function updateData(req: Request, res: Response) {
-  const data = req.body;
-  const branch = data.branch;
-  const results = data.results;
-  console.log("BACKEND:", JSON.stringify(data, null, 2));
+  const payload = req.body as UpdateTasksPayload;
 
-  const result = await updateJsonData(branch, results);
+  const [result, error] = await attempt(updateJsonData(payload));
 
-  if (!result.ok) {
-    res.status(200).json({ message: "Result not received" });
+  if (error) {
+    const message =
+      error instanceof Error ? error.message : "Failed to load due tasks";
+
+    return res.status(500).json({ message });
   }
 
-  res.status(200).json({ message: "Result received" });
+  return res.status(200).json({ message: "Result received", result });
 }
 
-export async function getDueTasks(req: Request, res: Response) {
-  const dueTasks = await prepareDueTasks();
+export async function getDueTasks(_req: Request, res: Response) {
+  const [dueTasks, error] = await attempt(prepareDueTasks());
 
-  if (Object.keys(dueTasks).length === 0) {
-    return res.json({});
+  if (error) {
+    return res.status(500).json({ message: "Failed to load due tasks" });
   }
 
   return res.json(dueTasks);
